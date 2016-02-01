@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\SYpanel\Migration\MigrationFix;
+use Illuminate\Database\Migrations\MigrationRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind(MigrationRepositoryInterface::class, MigrationFix::class);
         //
     }
 }
