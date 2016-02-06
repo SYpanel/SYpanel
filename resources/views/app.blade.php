@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta name="bob" content="{{csrf_token()}}">
     <title>@yield('title', 'SYpanel') | SYpanel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
@@ -16,9 +17,12 @@
     <link rel="stylesheet" type="text/css" href="{{asset('lib/css/jquery.dataTables.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('lib/css/dataTables.bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('lib/css/select2.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('lib/css/sweetalert2.css')}}">
     <!-- CSS App -->
     <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/themes/flat-blue.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
 </head>
 
 <body class="flat-blue">
@@ -31,7 +35,7 @@
                         <i class="fa fa-bars icon"></i>
                     </button>
                     <ol class="breadcrumb navbar-breadcrumb">
-                        <li class="active">Dashboard</li>
+                        @yield('breadcrumbs', '<li class="active">Dashboard</li>')
                     </ol>
                     <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                         <i class="fa fa-th icon"></i>
@@ -43,7 +47,7 @@
                     </button>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-expanded="false"><i class="fa fa-comments-o"></i></a>
+                                aria-expanded="false"><i class="fa fa-comments-o"></i></a>
                         <ul class="dropdown-menu animated fadeInDown">
                             <li class="title">
                                 Notification <span class="badge pull-right">0</span>
@@ -55,7 +59,7 @@
                     </li>
                     <li class="dropdown danger">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-expanded="false"><i class="fa fa-star-half-o"></i> 4</a>
+                                aria-expanded="false"><i class="fa fa-star-half-o"></i> 4</a>
                         <ul class="dropdown-menu danger  animated fadeInDown">
                             <li class="title">
                                 Notification <span class="badge pull-right">4</span>
@@ -90,8 +94,9 @@
                         </ul>
                     </li>
                     <li class="dropdown profile">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Emily
-                            Hart <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{\Auth::user()->username}}
+                            <span class="caret"></span></a>
                         <ul class="dropdown-menu animated fadeInDown">
                             <li class="profile-img">
                                 <img src="{{asset('img/profile/picjumbo.com_HNCK4153_resize.jpg')}}" class="profile-img">
@@ -99,12 +104,15 @@
                             <li>
                                 <div class="profile-info">
                                     <h4 class="username">Emily Hart</h4>
-                                    <p>emily_hart@email.com</p>
+                                    <p>{{\Auth::user()->email}}</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
                                         <button type="button" class="btn btn-default"><i class="fa fa-user"></i> Profile
                                         </button>
-                                        <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i>
-                                            Logout
+                                        <button type="button" class="btn btn-default">
+                                            <a href="{{action('Auth\AuthController@logout')}}">
+                                                <i class="fa fa-sign-out"></i>
+                                                Logout
+                                            </a>
                                         </button>
                                     </div>
                                 </div>
@@ -118,7 +126,7 @@
             <nav class="navbar navbar-default" role="navigation">
                 <div class="side-menu-container">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="{{action('HomeController@index')}}">
                             <div class="icon fa fa-paper-plane"></div>
                             <div class="title">SYpanel V.0.1</div>
                         </a>
@@ -126,123 +134,44 @@
                             <i class="fa fa-times icon"></i>
                         </button>
                     </div>
-                    <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="index.html">
+                    <div id="menu_search">
+                        <input type="text" placeholder="Search menu item">
+                        <div id="menu_search_results">
+                            <ul class="nav navbar-nav">
+
+                            </ul>
+                        </div>
+                    </div>
+                    <ul id="side_menu" class="nav navbar-nav">
+                        <li class="">
+                            <a href="{{action('HomeController@index')}}">
                                 <span class="icon fa fa-tachometer"></span><span class="title">Dashboard</span>
                             </a>
                         </li>
                         <li class="panel panel-default dropdown">
-                            <a data-toggle="collapse" href="#dropdown-element">
-                                <span class="icon fa fa-desktop"></span><span class="title">UI Kits</span>
+                            <a data-toggle="collapse" href="#dropdown-accounts">
+                                <span class="icon fa fa-users"></span><span class="title">Accounts</span>
                             </a>
                             <!-- Dropdown level 1 -->
-                            <div id="dropdown-element" class="panel-collapse collapse">
+                            <div id="dropdown-accounts" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="ui-kits/theming.html">Theming</a>
-                                        </li>
-                                        <li><a href="ui-kits/grid.html">Grid</a>
-                                        </li>
-                                        <li><a href="ui-kits/button.html">Buttons</a>
-                                        </li>
-                                        <li><a href="ui-kits/card.html">Cards</a>
-                                        </li>
-                                        <li><a href="ui-kits/list.html">Lists</a>
-                                        </li>
-                                        <li><a href="ui-kits/modal.html">Modals</a>
-                                        </li>
-                                        <li><a href="ui-kits/alert.html">Alerts & Toasts</a>
-                                        </li>
-                                        <li><a href="ui-kits/panel.html">Panels</a>
-                                        </li>
-                                        <li><a href="ui-kits/loader.html">Loaders</a>
-                                        </li>
-                                        <li><a href="ui-kits/step.html">Tabs & Steps</a>
-                                        </li>
-                                        <li><a href="ui-kits/other.html">Other</a>
-                                        </li>
+                                        <li class=""><a href="{{action('AccountsController@index')}}">List Accounts</a></li>
+                                        <li><a href="{{action('AccountsController@create')}}">Create New Account</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </li>
                         <li class="panel panel-default dropdown">
-                            <a data-toggle="collapse" href="#dropdown-table">
-                                <span class="icon fa fa-table"></span><span class="title">Table</span>
+                            <a data-toggle="collapse" href="#dropdown-packages">
+                                <span class="icon fa fa-square"></span><span class="title">Packages</span>
                             </a>
                             <!-- Dropdown level 1 -->
-                            <div id="dropdown-table" class="panel-collapse collapse">
+                            <div id="dropdown-packages" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="table/table.html">Table</a>
-                                        </li>
-                                        <li><a href="table/datatable.html">Datatable</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="panel panel-default dropdown">
-                            <a data-toggle="collapse" href="#dropdown-form">
-                                <span class="icon fa fa-file-text-o"></span><span class="title">Form</span>
-                            </a>
-                            <!-- Dropdown level 1 -->
-                            <div id="dropdown-form" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="form/ui-kits.html">Form UI Kits</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- Dropdown-->
-                        <li class="panel panel-default dropdown">
-                            <a data-toggle="collapse" href="#component-example">
-                                <span class="icon fa fa-cubes"></span><span class="title">Components</span>
-                            </a>
-                            <!-- Dropdown level 1 -->
-                            <div id="component-example" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="components/pricing-table.html">Pricing Table</a>
-                                        </li>
-                                        <li><a href="components/chartjs.html">Chart.JS</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- Dropdown-->
-                        <li class="panel panel-default dropdown">
-                            <a data-toggle="collapse" href="#dropdown-example">
-                                <span class="icon fa fa-slack"></span><span class="title">Page Example</span>
-                            </a>
-                            <!-- Dropdown level 1 -->
-                            <div id="dropdown-example" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="pages/login.html">Login</a>
-                                        </li>
-                                        <li><a href="pages/index.html">Landing Page</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- Dropdown-->
-                        <li class="panel panel-default dropdown">
-                            <a data-toggle="collapse" href="#dropdown-icon">
-                                <span class="icon fa fa-archive"></span><span class="title">Icons</span>
-                            </a>
-                            <!-- Dropdown level 1 -->
-                            <div id="dropdown-icon" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="icons/glyphicons.html">Glyphicons</a>
-                                        </li>
-                                        <li><a href="icons/font-awesome.html">Font Awesomes</a>
-                                        </li>
+                                        <li><a href="{{action('PackagesController@index')}}">List Packages</a></li>
+                                        <li><a href="{{action('PackagesController@create')}}">Create New Package</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -260,6 +189,10 @@
         <!-- Main Content -->
         <div class="container-fluid">
             <div class="side-body padding-top">
+                <div class="page-title">
+                    <span class="title">@yield('title')</span>
+                    <div class="description">@yield('subtitle')</div>
+                </div>
                 @yield('content')
             </div>
         </div>
@@ -279,12 +212,44 @@
         <script type="text/javascript" src="{{asset('lib/js/jquery.dataTables.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('lib/js/dataTables.bootstrap.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('lib/js/select2.full.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('lib/js/pGenerator.jquery.js')}}"></script>
+        <script type="text/javascript" src="{{asset('lib/js/jquery.complexify.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('lib/js/sweetalert2.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('lib/js/ace/ace.js')}}"></script>
         <script type="text/javascript" src="{{asset('lib/js/ace/mode-html.js')}}"></script>
         <script type="text/javascript" src="{{asset('lib/js/ace/theme-github.js')}}"></script>
+
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="bob"]').attr('content')
+                }
+            });
+        </script>
+
         <!-- Javascript -->
         <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
-        <script type="text/javascript" src="{{asset('js/index.js')}}"></script>
+{{--        <script type="text/javascript" src="{{asset('js/index.js')}}"></script>--}}
+
+        <script type="text/javascript">
+            $.expr[":"].contains = $.expr.createPseudo(function(arg) {
+                return function( elem ) {
+                    return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+                };
+            });
+
+            $('#menu_search input').on('keyup change', function () {
+                $('#menu_search_results ul').html('');
+                if($('#menu_search input').val() == ''){
+                    return;
+                }
+                $('#side_menu li a:contains(' + this.value + ')').each(function (k,v) {
+                    $('#menu_search_results ul').append('<li></li>');
+                    $(v).clone().appendTo('#menu_search_results ul li:last-child');
+                });
+            });
+        </script>
+        @yield('script')
     </div>
 </div>
 </body>

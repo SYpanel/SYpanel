@@ -28,4 +28,11 @@ Route::group(['middleware' => 'web'], function () {
 
 Route::group(['middleware' => ['web', 'auth']], function () {
     Route::get('/', 'HomeController@index');
+
+    Route::resource('accounts', 'AccountsController');
+    Route::model('accounts', \App\Models\Account::class);
+
+    Route::resource('packages', 'PackagesController');
+    Route::model('packages', \App\Models\Package::class);
+    Route::post('packages/packageJSON', 'PackagesController@packageJSON');
 });

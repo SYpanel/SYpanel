@@ -11,9 +11,16 @@ class Account extends Authenticatable
 	 * @var array
 	 */
 	protected $fillable = [
-		'name',
+		'domain',
+		'username',
 		'email',
 		'password',
+		'disk_space',
+		'bandwidth',
+		'emails',
+		'sub_domains',
+		'parked_domains',
+		'addon_domains',
 	];
 
 	/**
