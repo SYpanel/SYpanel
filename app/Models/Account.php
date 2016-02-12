@@ -4,6 +4,16 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * Class Account
+ * @version 1.0
+ * @package App\Models
+ * @property-read int id
+ * @property string $domain
+ * @property string username
+ * @property string email
+ *
+ */
 class Account extends Authenticatable
 {
 	/**

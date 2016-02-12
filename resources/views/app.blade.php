@@ -6,8 +6,8 @@
     <title>@yield('title', 'SYpanel') | SYpanel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
     <!-- CSS Libs -->
     <link rel="stylesheet" type="text/css" href="{{asset('lib/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('lib/css/font-awesome.min.css')}}">
@@ -135,7 +135,7 @@
                         </button>
                     </div>
                     <div id="menu_search">
-                        <input type="text" placeholder="Search menu item">
+                        <input type="text" placeholder="Search menu item" class="form-control">
                         <div id="menu_search_results">
                             <ul class="nav navbar-nav">
 

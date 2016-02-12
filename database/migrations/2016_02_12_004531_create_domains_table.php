@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAccountsTable extends Migration
+class CreateDomainsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,13 @@ class CreateAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('accounts', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+        Schema::create('domains', function (Blueprint $table) {
             $table->increments('id');
-            //$table->string('domain')->unique();
-            $table->string('username')->unique();
-            $table->string('email');
-            $table->string('password', 60);
-
-            /** package*/
+            $table->integer('user_id');
+            $table->string('tld');
+            $table->string('name');
+            $table->integer('type'); //
+            $table->boolean('is_primary');
             $table->integer('package_id')->default(0);
             $table->integer('disk_space')->default(0);
             $table->integer('bandwidth')->default(0);
@@ -29,8 +27,6 @@ class CreateAccountsTable extends Migration
             $table->integer('sub_domains')->default(0);
             $table->integer('parked_domains')->default(0);
             $table->integer('addon_domains')->default(0);
-
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -42,6 +38,6 @@ class CreateAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('accounts');
+        Schema::drop('domains');
     }
 }
