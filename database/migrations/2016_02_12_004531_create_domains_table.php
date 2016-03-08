@@ -14,12 +14,12 @@ class CreateDomainsTable extends Migration
     {
         Schema::create('domains', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('account_id')->unsigned()->nullable();
+            $table->foreign('account_id')->references('id')->on('accounts');
             $table->string('tld');
             $table->string('name');
-            $table->integer('type'); //
+            $table->integer('type');
             $table->boolean('is_primary');
-            $table->integer('package_id')->default(0);
             $table->integer('disk_space')->default(0);
             $table->integer('bandwidth')->default(0);
             $table->integer('emails')->default(0);

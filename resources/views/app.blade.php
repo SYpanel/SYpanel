@@ -176,6 +176,36 @@
                                 </div>
                             </div>
                         </li>
+                        <li class="panel panel-default dropdown">
+                            <a data-toggle="collapse" href="#dropdown-backup">
+                                <span class="icon fa fa-hdd-o"></span><span class="title">Backup / Restore</span>
+                            </a>
+                            <!-- Dropdown level 1 -->
+                            <div id="dropdown-backup" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="{{action('PackagesController@index')}}">Schedule A Backup</a></li>
+                                        <li><a href="{{action('PackagesController@index')}}">Restore</a></li>
+                                        <li><a href="{{action('PackagesController@index')}}">Backup Storage</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="panel panel-default dropdown">
+                            <a data-toggle="collapse" href="#dropdown-server">
+                                <span class="icon fa fa-server"></span><span class="title">Server</span>
+                            </a>
+                            <!-- Dropdown level 1 -->
+                            <div id="dropdown-server" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="{{action('PackagesController@index')}}">Services</a></li>
+                                        <li><a href="{{action('PackagesController@index')}}">Updates</a></li>
+                                        <li><a href="{{action('PackagesController@create')}}">Reboot / Halt</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
                         <li>
                             <a href="license.html">
                                 <span class="icon fa fa-thumbs-o-up"></span><span class="title">License</span>

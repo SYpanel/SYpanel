@@ -18,6 +18,7 @@ class AccountsController extends Controller
 	public function index()
 	{
 		$accounts = Account::all();
+
 		return view('account.index', compact('accounts'));
 	}
 
@@ -44,11 +45,12 @@ class AccountsController extends Controller
 
 
 		$account = Account::create($request->all());
+		$account->password = bcrypt($request->password);
 		if(!empty($request->input('package_id')))
 		{
-			$account->package_id = $request->input('package_id');
-			$account->save();
+			$account->package_id = $request->package_id;
 		}
+		$account->save();
 
 	}
 
