@@ -26,6 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+/*
+        // create new system user
+        // useradd -d /home/username -m -s /bin/bash -p password username
         $pool['msbyorg'] = [
             'user' => 'msbyorg',
             'group' => 'msbyorg',
@@ -36,7 +39,7 @@ class HomeController extends Controller
         $ini = new IniWriter();
         echo '<pre>';
         echo $ini->writeToString($pool);
-        die();
+        die();*/
 
         return view('app');
     }

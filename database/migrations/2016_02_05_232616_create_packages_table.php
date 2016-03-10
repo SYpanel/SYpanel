@@ -27,7 +27,6 @@ class CreatePackagesTable extends Migration
 		});
 
 		Schema::table('accounts', function (Blueprint $table) {
-			$table->integer('package_id')->unsigned()->nullable();
 			$table->foreign('package_id')->references('id')->on('packages');
 		});
 	}
