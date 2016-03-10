@@ -20,7 +20,6 @@ class CreateAccountsTable extends Migration
             $table->string('password', 60);
 
             /** package*/
-            $table->integer('package_id')->default(0);
             $table->integer('disk_space')->default(0);
             $table->integer('bandwidth')->default(0);
             $table->integer('emails')->default(0);
