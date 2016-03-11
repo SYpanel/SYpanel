@@ -34,4 +34,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::resource('packages', 'PackagesController');
     Route::model('packages', \App\Models\Package::class);
     Route::post('packages/packageJSON', 'PackagesController@packageJSON');
+
+    Route::get('/server/services', 'ServerController@services');
+    Route::post('/server/service', 'ServerController@serviceChange');
 });

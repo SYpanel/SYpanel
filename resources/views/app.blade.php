@@ -199,7 +199,7 @@
                             <div id="dropdown-server" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
-                                        <li><a href="{{action('PackagesController@index')}}">Services</a></li>
+                                        <li><a href="{{action('ServerController@services')}}">Services</a></li>
                                         <li><a href="{{action('PackagesController@index')}}">Updates</a></li>
                                         <li><a href="{{action('PackagesController@create')}}">Reboot / Halt</a></li>
                                     </ul>
