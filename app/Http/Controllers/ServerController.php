@@ -60,5 +60,14 @@ class ServerController extends Controller
 				shell_exec('sudo service ' . $request->service . ' restart');
 			break;
 		}
+		return ['success' => 'yes'];
+	}
+
+	public function updates()
+	{
+		//TODO
+		shell_exec('sudo apt-get update');
+		//$updates = shell_exec('sudu ');
+		return view('server.updates');
 	}
 }

@@ -37,4 +37,6 @@ Route::group(['middleware' => ['web', 'auth']], function () {
 
     Route::get('/server/services', 'ServerController@services');
     Route::post('/server/service', 'ServerController@serviceChange');
+
+    Route::get('/server/updates', 'ServerController@updates');
 });

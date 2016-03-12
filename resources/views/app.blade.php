@@ -200,11 +200,16 @@
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
                                         <li><a href="{{action('ServerController@services')}}">Services</a></li>
-                                        <li><a href="{{action('PackagesController@index')}}">Updates</a></li>
+                                        <li><a href="{{action('ServerController@updates')}}">Updates</a></li>
                                         <li><a href="{{action('PackagesController@create')}}">Reboot / Halt</a></li>
                                     </ul>
                                 </div>
                             </div>
+                        </li>
+                        <li>
+                            <a target="_blank" href="{{url('/pma')}}">
+                                <span class="icon fa fa-database"></span><span class="title">phpMyAdmin</span>
+                            </a>
                         </li>
                         <li>
                             <a href="license.html">
