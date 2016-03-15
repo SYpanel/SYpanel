@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\SYpanel\NginxConfig;
+use App\SYPanel\Ngnix\Server;
 use Illuminate\Http\Request;
 use Piwik\Ini\IniWriter;
 
@@ -26,6 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $server = Server::fileOrContent('/etc/nginx/conf.d/sypanel.conf')[0];
+
+        $server->toFile('/etc/nginx/conf.d/new_fish.conf');
 /*
         // create new system user
         // useradd -d /home/username -m -s /bin/bash -p password username
