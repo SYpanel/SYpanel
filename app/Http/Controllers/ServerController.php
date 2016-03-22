@@ -29,7 +29,8 @@ class ServerController extends Controller
 
 	public function services()
 	{
-		$services_raw = sy_exec('service --status-all | egrep \'mysql|php|bind9|dovecot|nginx|postfix|ssh\'');
+		echo $services_raw = sy_exec('service --status-all | egrep \'mysql|php|bind9|dovecot|nginx|postfix|ssh\'');
+		die();
 		$services_raw = explode("\n", $services_raw);
 
 		$services = [];
