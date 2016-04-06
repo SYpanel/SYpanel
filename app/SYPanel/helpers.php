@@ -2,7 +2,7 @@
 function sy_exec($cmd)
 {
 	$ssh = new \phpseclib\Net\SSH2('127.0.0.1', 51991);
-	dd(env('SYPANEL_SECRET'));
+	//dd(env('SYPANEL_SECRET'));
 	if(!$ssh->login('sypanel', env('SYPANEL_SECRET', '')))
 	{
 		return 'Login Failed!';
@@ -16,6 +16,7 @@ function sy_exec($cmd)
 /**
  * PAM Authentication
  * @link http://stackoverflow.com/a/7944446
+ *
  * @param string $user Linux username
  * @param string $pass Linux Password
  *
@@ -30,7 +31,7 @@ function authenticate($user, $pass)
 	 */
 	$shad = preg_split("/[$:]/", `cat /etc/shadow | grep "^$user\:"`);
 	/** use mkpasswd command to generate shadow line passing $pass and $shad[3] (salt)
-	 *split the result into component parts and store in array $mkps
+	 * split the result into component parts and store in array $mkps
 	 */
 	$mkps = preg_split("/[$:]/", trim(`mkpasswd -m sha-512 $pass $shad[3]`));
 
