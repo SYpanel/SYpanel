@@ -31,19 +31,13 @@ class AuthController extends Controller
     protected $redirectTo = '/';
 
     /**
-     * Change auth field to username, instead of email
-     * @var string
-     */
-    protected $username = 'username';
-
-    /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
     /**
@@ -57,7 +51,7 @@ class AuthController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|min:6|confirmed',
         ]);
     }
 
